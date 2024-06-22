@@ -6,37 +6,37 @@ namespace RamenGo.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class BrothController : ControllerBase
+    public class ProteinsController : ControllerBase
     {
-        private readonly IRepository<Broth> _repository;
+        private readonly IRepository<Protein> _repository;
 
-        public BrothController(IRepository<Broth> repository)
+        public ProteinsController(IRepository<Protein> repository)
         {
             _repository = repository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Broth>>> GetAsync()
+        public async Task<ActionResult<IEnumerable<Protein>>> GetAsync()
         {
             return Ok(await _repository.GetAllAsync());
         }
 
         [HttpGet("id")]
-        public async Task<ActionResult<Broth>> GetAsync(string id)
+        public async Task<ActionResult<Protein>> GetAsync(string id)
         {
-            Broth? broth = await _repository.GetAsync(id);
+            Protein? protein = await _repository.GetAsync(id);
 
-            if (broth is null)
+            if (protein is null)
             {
                 ErrorResponse error = new()
                 {
-                    Error = "No broth with the provided id has been found."
+                    Error = "No protein with the provided id has been found."
                 };
 
                 return NotFound(error);
             }
 
-            return Ok(broth);
+            return Ok(protein);
         }
     }
 }

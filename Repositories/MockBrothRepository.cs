@@ -15,9 +15,9 @@ namespace RamenGo.API.Repositories
                     Id = "1",
                     Name = "Salt",
                     Description = "Simple like the seawater, nothing more.",
-                    Price = "US$ 10",
                     ImageActive = "https://tech.redventures.com.br/icons/salt/active.svg",
-                    ImageInactive = "https://tech.redventures.com.br/icons/salt/inactive.svg"
+                    ImageInactive = "https://tech.redventures.com.br/icons/salt/inactive.svg",
+                    Price = 10
                 },
 
                 new()
@@ -25,9 +25,9 @@ namespace RamenGo.API.Repositories
                     Id = "2",
                     Name = "Shoyu",
                     Description = "The good old and traditional soy sauce.",
-                    Price = "US$ 10",
                     ImageActive = "https://tech.redventures.com.br/icons/shoyu/active.svg",
-                    ImageInactive = "https://tech.redventures.com.br/icons/shoyu/inactive.svg"
+                    ImageInactive = "https://tech.redventures.com.br/icons/shoyu/inactive.svg",
+                    Price = 10
                 },
 
                 new()
@@ -35,9 +35,9 @@ namespace RamenGo.API.Repositories
                     Id = "3",
                     Name = "Miso",
                     Description = "Paste made of fermented soybeans.",
-                    Price = "US$ 12",
                     ImageActive = "https://tech.redventures.com.br/icons/miso/active.svg",
-                    ImageInactive = "https://tech.redventures.com.br/icons/miso/inactive.svg"
+                    ImageInactive = "https://tech.redventures.com.br/icons/miso/inactive.svg",
+                    Price = 12
                 }
             };
         }

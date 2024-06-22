@@ -21,7 +21,7 @@ namespace RamenGo.API
             builder.Services.AddSingleton<IRepository<Broth>, MockBrothRepository>();
             builder.Services.AddSingleton<IRepository<Protein>, MockProteinRepository>();
             builder.Services.AddSingleton<IRepository<Order>, MockOrderRepository>();
-            builder.Services.AddSingleton<IOrderService, OrderService>();
+            builder.Services.AddSingleton<IOrdersService, OrdersService>();
 
             builder.Services.AddMvc(options => options.SuppressAsyncSuffixInActionNames = false);
 
@@ -29,20 +29,26 @@ namespace RamenGo.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(options => options.AddPolicy(name: "AllowAnyOrigins",
+                                                                  policy => 
+                                                                  {
+                                                                      policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+                                                                  }));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowAnyOrigins");
 
             app.UseAuthorization();
 
             app.MapControllers();
+        
 
             app.Run();
         }

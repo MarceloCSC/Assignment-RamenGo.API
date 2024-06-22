@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace RamenGo.API.Services
 {
-    public class OrderService : IOrderService
+    public class OrdersService : IOrdersService
     {
         private readonly AppConfig _appConfig;
         private HttpClient _client = new();
@@ -16,7 +16,7 @@ namespace RamenGo.API.Services
         private readonly IRepository<Protein> _proteinRepository;
         private readonly IRepository<Order> _orderRepository;
 
-        public OrderService(IOptions<AppConfig> options,
+        public OrdersService(IOptions<AppConfig> options,
                             IRepository<Broth> brothRepository,
                             IRepository<Protein> proteinRepository,
                             IRepository<Order> orderRepository)
@@ -32,8 +32,13 @@ namespace RamenGo.API.Services
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<OrderResponse?> CreateOrderAsync(OrderRequest orderRequest)
+        public async Task<OrderResponse?> CreateOrderAsync(string apiKey, OrderRequest orderRequest)
         {
+            if (apiKey != _appConfig.ApiKey)
+            {
+                return null;
+            }
+
             using HttpRequestMessage request = new(HttpMethod.Post, new Uri("https://api.tech.redventures.com.br/orders/generate-id"));
 
             using StringContent content = new(string.Empty, Encoding.UTF8, "application/json");
@@ -62,6 +67,12 @@ namespace RamenGo.API.Services
             };
 
             string description = await GetDescriptionAsync(orderRequest.BrothId, orderRequest.ProteinId);
+
+            if (description == string.Empty)
+            {
+                return null;
+            }
+
             string image = await GetImageAsync(orderRequest.ProteinId);
 
             Order order = new()

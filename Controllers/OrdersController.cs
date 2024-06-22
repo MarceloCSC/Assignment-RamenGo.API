@@ -7,12 +7,12 @@ namespace RamenGo.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class OrderController : ControllerBase
+    public class OrdersController : ControllerBase
     {
         private readonly IRepository<Order> _repository;
-        private readonly IOrderService _service;
+        private readonly IOrdersService _service;
 
-        public OrderController(IRepository<Order> repository, IOrderService service)
+        public OrdersController(IRepository<Order> repository, IOrdersService service)
         {
             _repository = repository;
             _service = service;
@@ -43,21 +43,21 @@ namespace RamenGo.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<OrderResponse>> CreateAsync(OrderRequest request)
+        public async Task<ActionResult<OrderResponse>> CreateAsync([FromHeader(Name = "x-api-key")] string apiKey, [FromBody] OrderRequest request)
         {
-            OrderResponse? response = await _service.CreateOrderAsync(request);
+            OrderResponse? response = await _service.CreateOrderAsync(apiKey, request);
 
             if (response is null)
             {
                 ErrorResponse error = new()
                 {
-                    Error = "No order has been created."
+                    Error = "Could not place order."
                 };
 
                 return BadRequest(error);
             }
 
-            return CreatedAtAction(nameof(GetAsync), new { response.Id }, response);
+            return response;
         }
     }
 }

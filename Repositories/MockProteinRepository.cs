@@ -15,9 +15,9 @@ namespace RamenGo.API.Repositories
                     Id = "1",
                     Name = "Chasu",
                     Description = "A sliced flavourful pork meat with a selection of season vegetables.",
-                    Price = "US$ 10",
                     ImageActive = "https://tech.redventures.com.br/icons/pork/active.svg",
-                    ImageInactive = "https://tech.redventures.com.br/icons/pork/inactive.svg"
+                    ImageInactive = "https://tech.redventures.com.br/icons/pork/inactive.svg",
+                    Price = 10
                 },
 
                 new()
@@ -25,9 +25,9 @@ namespace RamenGo.API.Repositories
                     Id = "2",
                     Name = "Yasai Vegetarian",
                     Description = "A delicious vegetarian lamen with a selection of season vegetables.",
-                    Price = "US$ 10",
                     ImageActive = "https://tech.redventures.com.br/icons/yasai/active.svg",
-                    ImageInactive = "https://tech.redventures.com.br/icons/yasai/inactive.svg"
+                    ImageInactive = "https://tech.redventures.com.br/icons/yasai/inactive.svg",
+                    Price = 10
                 },
 
                 new()
@@ -35,9 +35,9 @@ namespace RamenGo.API.Repositories
                     Id = "3",
                     Name = "Karaague",
                     Description = "Three units of fried chicken, moyashi, ajitama egg and other vegetables.",
-                    Price = "US$ 12",
                     ImageActive = "https://tech.redventures.com.br/icons/chicken/active.svg",
-                    ImageInactive = "https://tech.redventures.com.br/icons/chicken/inactive.svg"
+                    ImageInactive = "https://tech.redventures.com.br/icons/chicken/inactive.svg",
+                    Price = 12
                 }
             };
         }
